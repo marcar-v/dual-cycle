@@ -1,24 +1,24 @@
-## Perfil de usuario
-- Identificador
-- Nombre
-- Hash(Contraseña)
+## User's profile
+- ID
+- Name
+- Hash(Password)
 - Email
-- Año de nacimiento
-- Género
+- Year
+- Genre
 
-## Autorizaciones
-- Usuario que autoriza
-- Usuario autorizado
-- Permiso lectura (bool)
-- Permiso escritura (bool)
+## Permissions
+- Authorizing user
+- Authorized user
+- Write permissions (bool)
+- Read permissions (bool)
 
-## Evento del ciclo
-- Tipo de evento (inicio, fin)
-- Fecha
-- ID del autor
-- ID del usuario a quien pertenece el evento
+## Cycle events
+- Event type (start, end)
+- Date
+- Author ID
+- Owner ID
 
-## Estadísticas de usuario
-- Identificador del usuario al que hacen referencia las estadísticas
-- Duración media del periodo
-- Tiempo medio entre periodo
+## User's stats
+- User ID referenced by the statistics
+- Average period duration
+- Average time between periods

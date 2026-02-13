@@ -88,12 +88,38 @@ Only the mutable attributes of the users can be modified.
 - 200 - Ok
 - 500 - Internal server error
 
+## `/<stats>`
+
+### User's stats
+| URI              |  Method  | Body | Headers |
+|:-----------------|:--------:|------|:--------|
+| `/stats`         |  `GET`  | -    | -    |
+
+**Response**
+
+```json
+{
+  "stats": [
+    {
+    "id": "12145436",
+    "periodAvg": 5,
+    "timeAvg": 28
+    }
+  ]
+}
+```
+
+**Errors**
+- 200 - Ok
+- 204 - No content
+- 500 - Internal server error
+
 ## `/<example>`
 
 ### Endpoint title
-| URI | Method | Body | Headers |
-|:---|:---:|:---|:---|
-| | | |
+| URI | Method | Headers |
+|:---|:--:|:--------|
+| |  |         |
 
 **Body**
 
