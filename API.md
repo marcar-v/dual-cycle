@@ -1,18 +1,18 @@
 # API Rest Design
 
-## `/users`
+## Users endpoints
 
 ### Users list
-| URI     | Method | Body | Headers |
-|:--------|:------:|:-----|:--------|
-| `/users` | `GET`  | -    | -       |
+| URI     | Method | Headers             |
+|:--------|:-----:|:--------------------|
+| `/users` | `GET` | | `TODO: authentication` |
 
 **Response**
 ```json
 {
   "users": [
     {
-      "id": "12145436",
+      "id": "u1234",
       "name": "User1",
       "email": "user1@email.com",
       "year": 1995,
@@ -25,12 +25,13 @@
 **Errors**
 - 200 - Ok
 - 204 - No content
+- 403 - Forbidden
 - 500 - Internal server error
 
 ### Create user
-| URI | Method | Headers |
-|:----|:------:|:--------|
-| `/users`    | `POST`  | -       |
+| URI       | Method | Headers |
+|:----------|:------:|:-------|
+| `/users`  | `POST` |        |
 
 **Body**
 ```json
@@ -44,7 +45,7 @@
 **Response**
 ```json
 {
-  "id": "12145436",
+  "id": "u1234",
   "name": "User1",
   "email": "user1@email.com"
 }
@@ -59,9 +60,9 @@
 ### Update user
 Only the mutable attributes of the users can be modified.
 
-| URI               | Method | Headers |
-|:------------------|:------:|:--------|
-| `/users/{userID}` | `PUT`  | -       |
+| URI               | Method | Headers                 |
+|:------------------|:------:|:------------------------|
+| `/users/{userID}` | `PUT`  | `TODO: authentication`  |
 
 **Body**
 ```json
@@ -75,35 +76,38 @@ Only the mutable attributes of the users can be modified.
 **Errors**
 - 200 - Ok
 - 400 - Bad request
+- 403 - Forbidden
 - 404 - Not found
 - 500 - Internal server error
 
 ### Delete user
-| URI               |  Method  | Headers |
-|:------------------|:--------:|:--------|
-| `/users/{userID}` | `DELETE` | -       |
-
+| URI               |  Method  | Headers                |
+|:------------------|:--------:|:-----------------------|
+| `/users/{userID}` | `DELETE` | `TODO: authentication` |
 
 **Errors**
 - 200 - Ok
+- 403 - Forbidden
 - 500 - Internal server error
 
-## `/<stats>`
+## Cycle events endpoints
 
-### User's stats
-| URI              |  Method  | Body | Headers |
-|:-----------------|:--------:|------|:--------|
-| `/stats`         |  `GET`  | -    | -    |
+### User events
+| URI                       | Method | Headers                |
+|:--------------------------|:------:|:-----------------------|
+| `/events?userID={userID}` | `GET`  | `TODO: authentication` |
 
 **Response**
 
 ```json
 {
-  "stats": [
+  "events": [
     {
-    "id": "12145436",
-    "periodAvg": 5,
-    "timeAvg": 28
+      "id": "e1234",
+      "type": "start",
+      "date": "YYYY-DD-MM",
+      "authorID": "u5678",
+      "userID": "u1234"
     }
   ]
 }
@@ -112,6 +116,113 @@ Only the mutable attributes of the users can be modified.
 **Errors**
 - 200 - Ok
 - 204 - No content
+- 400 - Bad request
+- 403 - Forbidden
+- 404 - Not found
+- 500 - Internal server error
+
+### Create user cycle event
+| URI                | Method | Headers                |
+|:-------------------|:------:|:-----------------------|
+| `/events` | `POST` | `TODO: authentication` |
+
+**Body**
+
+```json
+{
+  "type": "start",
+  "date": "YYYY-DD-MM",
+  "userID": "u1234"
+}
+```
+
+**Response**
+```json
+{
+  "id": "e1234",
+  "type": "start",
+  "date": "YYYY-DD-MM",
+  "authorID": "u5678",
+  "userID": "u1234"
+}
+```
+
+**Errors**
+- 200 - Ok
+- 400 - Bad request
+- 403 - Forbidden
+- 500 - Internal server error
+
+### Update user cycle event
+| URI                 | Method | Headers                |
+|:--------------------|:------:|:-----------------------|
+| `/events/{eventID}` | `PUT`  | `TODO: authentication` |
+
+**Body**
+
+```json
+{
+  "type": "start",
+  "date": "YYYY-DD-MM",
+  "userID": "u1234"
+}
+```
+
+**Response**
+```json
+{
+  "id": "e1234",
+  "type": "start",
+  "date": "YYYY-DD-MM",
+  "authorID": "u5678",
+  "userID": "u1234"
+}
+```
+
+**Errors**
+- 200 - Ok
+- 400 - Bad request
+- 403 - Forbidden
+- 404 - Not found
+- 500 - Internal server error
+
+### Delete user cycle event
+| URI                 |  Method  | Headers                |
+|:--------------------|:--------:|:-----------------------|
+| `/events/{eventID}` | `DELETE` | `TODO: authentication` |
+
+
+**Errors**
+- 200 - Ok
+- 403 - Forbidden
+- 500 - Internal server error
+
+## Stats endpoints
+
+### User's stats
+| URI               |  Method  | Body | Headers                 |
+|:------------------|:--------:|------|:------------------------|
+| `/stats/{userID}` |  `GET`  | -    | `TODO: authentication`  |
+
+**Response**
+
+```json
+{
+  "stats": [
+    {
+      "userID": "u1234",
+      "periodDuration": 5,
+      "timeBetweenPeriods": 28,
+      "estimatedNextPeriod": 14 
+    }
+  ]
+}
+```
+
+**Errors**
+- 200 - Ok
+- 204 - No content
+- 403 - Forbidden
 - 500 - Internal server error
 
 ## `/<example>`
