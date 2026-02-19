@@ -7,8 +7,8 @@
 - Genre
 
 ## Permissions
-- Authorizing user
-- Authorized user
+- Authorizing user [targetUserID] --> a quién afecta
+- Authorized user [userID] --> quién lo ostenta
 - Write permissions (bool)
 - Read permissions (bool)
 
