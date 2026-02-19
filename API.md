@@ -88,6 +88,20 @@ Only the mutable attributes of the users can be modified.
 - 200 - Ok
 - 500 - Internal server error
 
+## `/events`
+
+### Endpoint title
+| URI | Method | Headers |
+|:---|:--:|:--------|
+| |  |         |
+
+**Body**
+
+**Response**
+
+**Errors**
+
+
 ## `/<stats>`
 
 ### User's stats
