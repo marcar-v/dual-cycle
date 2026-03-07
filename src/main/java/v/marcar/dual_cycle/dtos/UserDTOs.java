@@ -16,11 +16,4 @@ public class UserDTOs {
             String name,
             String email
     ) {}
-    public record GetUserResponse(
-            String id,
-            String name,
-            String email
-    ) {}
-
-    //Esto posiblemente haya una forma mejor de hacerlo, ¿igual sobrecargas o así?
 }

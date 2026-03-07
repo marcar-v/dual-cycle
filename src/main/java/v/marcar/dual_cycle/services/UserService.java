@@ -37,10 +37,10 @@ public class UserService {
     }
 
     //Get user info by ID
-    public GetUserResponse getUser(String userId){
+    public CreateUserResponse getUser(String userId){
         UserEntity user = this.repo.getReferenceById(userId);
         UserEntity userFound = this.repo.save(user);
-        return new GetUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail());
+        return new CreateUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail());
     }
 
     //Delete user by ID
