@@ -1,5 +1,6 @@
 package v.marcar.dual_cycle.services;
 
+import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import v.marcar.dual_cycle.dtos.UserDTOs.*;
@@ -7,6 +8,7 @@ import v.marcar.dual_cycle.entities.UserEntity;
 import v.marcar.dual_cycle.repositories.UserRepository;
 
 import java.util.UUID;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -27,5 +29,22 @@ public class UserService {
         UserEntity savedUser = this.repo.save(newUser);
         // Devolver el resultado
         return new CreateUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+    }
+
+    //Get all users
+    public List<UserEntity> getUsers() {
+        return this.repo.findAll();
+    }
+
+    //Get user info by ID
+    public GetUserResponse getUser(String userId){
+        UserEntity user = this.repo.getReferenceById(userId);
+        UserEntity userFound = this.repo.save(user);
+        return new GetUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail());
+    }
+
+    //Delete user by ID
+    public void deleteUser(String userId){
+        repo.deleteById(userId);
     }
 }
