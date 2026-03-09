@@ -28,7 +28,7 @@ public class UserService {
         UserEntity newUser = new UserEntity(id, req.name(), req.email(), passHash);
         UserEntity savedUser = this.repo.save(newUser);
         // Devolver el resultado
-        return new CreateUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+        return new CreateUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
     }
 
     //Get all users
@@ -40,7 +40,19 @@ public class UserService {
     public CreateUserResponse getUser(String userId){
         UserEntity user = this.repo.getReferenceById(userId);
         UserEntity userFound = this.repo.save(user);
-        return new CreateUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail());
+        return new CreateUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail(), userFound.getGenre(), userFound.getYear());
+    }
+
+    //Update user
+    public UpdateUserResponse updateUser(String userId, UpdateUserRequest request){
+        UserEntity user = this.repo.findById(userId)
+                        .orElseThrow();
+        user.setGenre(request.genre());
+        user.setYear(request.year());
+
+        this.repo.save(user);
+
+        return new UpdateUserResponse(user.getGenre(), user.getYear());
     }
 
     //Delete user by ID
