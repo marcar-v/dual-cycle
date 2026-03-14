@@ -16,10 +16,16 @@ public class UserDTOs {
     public record CreateUserResponse(
             String id,
             String name,
-            String email,
-            String  genre,
-            int year
+            String email
     ) {}
+
+    public record GetUserResponse(
+            String id,
+            String name,
+            String email,
+            String genre,
+            int year
+    ){}
 
     public record UpdateUserRequest(
             @Size(max = 32) String genre,
@@ -27,6 +33,7 @@ public class UserDTOs {
     ) {}
 
     public record UpdateUserResponse(
+            String name,
             String genre,
             int year
     ) {}
