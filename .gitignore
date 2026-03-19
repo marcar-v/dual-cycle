@@ -1,0 +1,7 @@
+.gradle/
+.idea/
+ build/
+ data/app.db
+ gradle/
+ gradlew
+ gradlew.bat

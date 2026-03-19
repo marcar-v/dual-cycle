@@ -32,7 +32,7 @@ public class UserController {
 
     //User by ID
     @GetMapping("/{userId}")
-    public CreateUserResponse get(@PathVariable("userId") String userId) {
+    public GetUserResponse get(@PathVariable("userId") String userId) {
         return service.getUser(userId);
     }
 
