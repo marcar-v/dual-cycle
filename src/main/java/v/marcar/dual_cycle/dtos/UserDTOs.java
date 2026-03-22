@@ -8,9 +8,7 @@ public class UserDTOs {
     public record CreateUserRequest(
             @NotBlank @Size(max = 255) String name,
             @NotBlank @Email @Size(max = 255) String email,
-            @NotBlank @Size(min = 8, max = 64) String password,
-            @Size(max = 32) String genre,
-            int year
+            @NotBlank @Size(min = 8, max = 64) String password
     ) {}
 
     public record CreateUserResponse(
