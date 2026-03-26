@@ -7,6 +7,7 @@ import v.marcar.dual_cycle.dtos.UserDTOs.*;
 import v.marcar.dual_cycle.entities.UserEntity;
 import v.marcar.dual_cycle.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
 
@@ -32,8 +33,13 @@ public class UserService {
     }
 
     //Get all users
-    public List<UserEntity> getUsers() {
-        return this.repo.findAll();
+    public List<GetUserResponse> getUsers() {
+        List<UserEntity> usersList = this.repo.findAll();
+        List<GetUserResponse> users = new ArrayList<>();
+        usersList.forEach(dbUser -> {
+            users.add(new GetUserResponse(dbUser.getId(), dbUser.getName(), dbUser.getEmail(), dbUser.getGenre(), dbUser.getYear()));
+        });
+        return users;
     }
 
     //Get user info by ID
