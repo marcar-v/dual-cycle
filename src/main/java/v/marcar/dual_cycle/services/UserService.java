@@ -1,6 +1,5 @@
 package v.marcar.dual_cycle.services;
 
-import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import v.marcar.dual_cycle.dtos.UserDTOs.*;
