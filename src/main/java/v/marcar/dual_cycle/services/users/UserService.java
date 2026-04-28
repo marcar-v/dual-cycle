@@ -1,4 +1,4 @@
-package v.marcar.dual_cycle.services;
+package v.marcar.dual_cycle.services.users;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

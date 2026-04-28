@@ -4,8 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import v.marcar.dual_cycle.dtos.UserDTOs.*;
-import v.marcar.dual_cycle.entities.UserEntity;
-import v.marcar.dual_cycle.services.UserService;
+import v.marcar.dual_cycle.services.users.UserService;
 
 import java.util.List;
 

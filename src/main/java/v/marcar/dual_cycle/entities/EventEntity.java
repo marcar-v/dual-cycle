@@ -21,22 +21,20 @@ public class EventEntity {
     @Column(name = "date", nullable = false)
     private LocalDate date;
     @ManyToOne
-    @Id
     @JoinColumn(name = "authorID", nullable = false)
-    private UserEntity authorID;
+    private UserEntity author;
     @ManyToOne
-    @Id //¿Esto es necesario?
     @JoinColumn(name = "userID", nullable = false)
-    private UserEntity userID;
+    private UserEntity user;
 
     protected EventEntity() {}
 
-    public EventEntity(String id, String type, LocalDate date, UserEntity authorID, UserEntity userID){
+    public EventEntity(String id, String type, LocalDate date, UserEntity author, UserEntity user){
         this.id = id;
         this.type = type;
         this.date = date;
-        this.authorID = authorID;
-        this.userID = userID;
+        this.author = author;
+        this.user = user;
     }
 
     public String getId() {
@@ -63,19 +61,19 @@ public class EventEntity {
         this.date = date;
     }
 
-    public UserEntity getAuthorID() {
-        return authorID;
+    public UserEntity getAuthor() {
+        return author;
     }
 
-    public void setAuthorID(UserEntity authorID) {
-        this.authorID = authorID;
+    public void setAuthor(UserEntity authorID) {
+        this.author = authorID;
     }
 
-    public UserEntity getUserID() {
-        return userID;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserID(UserEntity userID) {
-        this.userID = userID;
+    public void setUser(UserEntity userID) {
+        this.user = userID;
     }
 }
