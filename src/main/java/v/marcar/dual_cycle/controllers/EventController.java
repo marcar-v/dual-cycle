@@ -24,7 +24,18 @@ public class EventController {
     }
 
     @GetMapping
-    public GetEventsResponse get (@RequestParam String userID){
+    public GetEventResponse get (@RequestParam String userID){
+        return this.service.getEvent(userID);
         //Aquí con el userID se hace una llamada a la BD pa coger la info y tal y tal
+    }
+
+    @PutMapping("/{eventID}")
+    public UpdateEventResponse updateEvent(@PathVariable String eventID, @RequestBody UpdateEventRequest req){
+        return service.updateEvent(eventID, req);
+    }
+
+    @DeleteMapping("/{eventID}")
+    public void delete (@PathVariable String eventID){
+        service.deleteUser(eventID);
     }
 }

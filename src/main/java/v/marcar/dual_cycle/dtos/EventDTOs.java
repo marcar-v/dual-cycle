@@ -34,4 +34,18 @@ public class EventDTOs {
     public record GetEventsResponse(
             List<GetEventResponse> events
     ) {}
+
+    public record UpdateEventRequest(
+            String type,
+            LocalDate date,
+            UserDTOs.GetUserResponse user
+    ) {}
+
+    public record UpdateEventResponse(
+            String id,
+            String type,
+            LocalDate date,
+            UserDTOs.GetUserResponse author,
+            UserDTOs.GetUserResponse user
+    ) {}
 }
