@@ -41,28 +41,32 @@ public class EventService {
         return new CreateEventResponse(savedEvent.getId(), savedEvent.getType(), savedEvent.getDate(), authorResponse, userResponse);
     }
 
-    public GetEventResponse getEvent(String userID){
-        EventEntity event = this.eventRepo.getReferenceById(userID);
-        EventEntity eventFound = this.eventRepo.save(event);
+//    public GetEventResponse getEvent(String userID){
+//        EventEntity event = this.eventRepo.getReferenceById(userID);
+//        EventEntity eventFound = this.eventRepo.save(event);
+//
+//        return new GetEventResponse (eventFound.getId(), eventFound.getType(), eventFound.getDate(),);
+//    }
 
-        return new GetEventResponse (eventFound.getId(), eventFound.getType(), eventFound.getDate(),);
-    }
+    public UpdateEventResponse updateEvent(String eventID, UpdateEventRequest request) {
 
-    public UpdateEventResponse updateEvent(String eventID, UpdateEventRequest request){
+        UserEntity user = this.userRepo.findById(request.user().id())
+                .orElseThrow(() -> new RuntimeException("User not found"));
         EventEntity event = this.eventRepo.findById(eventID)
                 .orElseThrow();
         event.setType(request.type());
         event.setDate(request.date());
-        event.setUser(event.getUser());
-        UserEntity user = this.userRepo.getReferenceById(request.user().id());
+        event.setUser(user);
 
         UserEntity savedAuthor = event.getAuthor();
         UserEntity savedUser = event.getUser();
+
         GetUserResponse authorResponse = new GetUserResponse(savedAuthor.getId(), savedAuthor.getName(), savedAuthor.getEmail(), savedAuthor.getGenre(), savedAuthor.getYear());
         GetUserResponse userResponse = new GetUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
 
         this.eventRepo.save(event);
-        return new UpdateEventResponse(event.getId(),event.getType(), event.getDate(), authorResponse, userResponse);
+
+        return new UpdateEventResponse(event.getId(), event.getType(), event.getDate(), authorResponse, userResponse);
     }
 
     public void deleteUser(String eventID){

@@ -11,14 +11,10 @@ import jakarta.persistence.*;
 )
 public class UserEntity {
     @Id
-    @Column(name = "id", nullable = false, length = 64)
-    private String id;
-    @Column(name = "name", nullable = false)
-    private String name;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "passHash", nullable = false, length = 64)
-    private String passHash;
+    @Column(name = "name", nullable = false)
+    private String name;
     @Column(name = "year", nullable = true)
     private int year;
     @Column(name = "genre", nullable = true, length = 32)
@@ -26,19 +22,9 @@ public class UserEntity {
 
     protected UserEntity() {}
 
-    public UserEntity(String id, String name, String email, String passHash) {
-        this.id = id;
+    public UserEntity(String name, String email) {
         this.name = name;
         this.email = email;
-        this.passHash = passHash;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -55,14 +41,6 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassHash() {
-        return passHash;
-    }
-
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
     }
 
     public int getYear() {

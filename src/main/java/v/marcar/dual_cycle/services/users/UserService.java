@@ -20,15 +20,11 @@ public class UserService {
     }
 
     public CreateUserResponse createUser(CreateUserRequest req) {
-        // Generar un identificador unico para el usuario
-        String id = UUID.randomUUID().toString();
-        // Hashear la contraseña
-        String passHash = this.passEncoder.encode(req.password());
         // Guardar el usuario en la base de datos (usando la entidad)
-        UserEntity newUser = new UserEntity(id, req.name(), req.email(), passHash);
+        UserEntity newUser = new UserEntity(req.name(), req.email());
         UserEntity savedUser = this.repo.save(newUser);
         // Devolver el resultado
-        return new CreateUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+        return new CreateUserResponse(savedUser.getName(), savedUser.getEmail());
     }
 
     //Get all users
@@ -36,7 +32,7 @@ public class UserService {
         List<UserEntity> usersList = this.repo.findAll();
         List<GetUserResponse> users = new ArrayList<>();
         usersList.forEach(dbUser -> {
-            users.add(new GetUserResponse(dbUser.getId(), dbUser.getName(), dbUser.getEmail(), dbUser.getGenre(), dbUser.getYear()));
+            users.add(new GetUserResponse(dbUser.getName(), dbUser.getEmail(), dbUser.getGenre(), dbUser.getYear()));
         });
         return users;
     }
@@ -45,7 +41,7 @@ public class UserService {
     public GetUserResponse getUser(String userId){
         UserEntity user = this.repo.getReferenceById(userId);
         UserEntity userFound = this.repo.save(user);
-        return new GetUserResponse(userFound.getId(), userFound.getName(), userFound.getEmail(), userFound.getGenre(), userFound.getYear());
+        return new GetUserResponse(userFound.getName(), userFound.getEmail(), userFound.getGenre(), userFound.getYear());
     }
 
     //Update user

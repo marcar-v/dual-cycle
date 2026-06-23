@@ -23,12 +23,13 @@ public class EventController {
         return this.service.createEvent(req);
     }
 
-    @GetMapping
-    public GetEventResponse get (@RequestParam String userID){
-        return this.service.getEvent(userID);
-        //Aquí con el userID se hace una llamada a la BD pa coger la info y tal y tal
-    }
+//    @GetMapping
+//    public GetEventResponse get(@RequestParam String userID) {
+//        return this.service.getEvent(userID);
+//        //Aquí con el userID se hace una llamada a la BD pa coger la info y tal y tal
+//    }
 
+    //Esto no está funcionando, tengo que mirar por qué
     @PutMapping("/{eventID}")
     public UpdateEventResponse updateEvent(@PathVariable String eventID, @RequestBody UpdateEventRequest req){
         return service.updateEvent(eventID, req);
