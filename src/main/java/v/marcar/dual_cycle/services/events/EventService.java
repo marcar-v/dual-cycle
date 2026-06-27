@@ -36,8 +36,8 @@ public class EventService {
 
         UserEntity savedUser = savedEvent.getUser();
         UserEntity savedAuthor = savedEvent.getAuthor();
-        GetUserResponse userResponse = new GetUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
-        GetUserResponse authorResponse = new GetUserResponse(savedAuthor.getId(), savedAuthor.getName(), savedAuthor.getEmail(), savedAuthor.getGenre(), savedAuthor.getYear());
+        GetUserResponse userResponse = new GetUserResponse(savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
+        GetUserResponse authorResponse = new GetUserResponse(savedAuthor.getName(), savedAuthor.getEmail(), savedAuthor.getGenre(), savedAuthor.getYear());
         return new CreateEventResponse(savedEvent.getId(), savedEvent.getType(), savedEvent.getDate(), authorResponse, userResponse);
     }
 
@@ -50,7 +50,7 @@ public class EventService {
 
     public UpdateEventResponse updateEvent(String eventID, UpdateEventRequest request) {
 
-        UserEntity user = this.userRepo.findById(request.user().id())
+        UserEntity user = this.userRepo.findById(request.user().email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         EventEntity event = this.eventRepo.findById(eventID)
                 .orElseThrow();
@@ -61,8 +61,8 @@ public class EventService {
         UserEntity savedAuthor = event.getAuthor();
         UserEntity savedUser = event.getUser();
 
-        GetUserResponse authorResponse = new GetUserResponse(savedAuthor.getId(), savedAuthor.getName(), savedAuthor.getEmail(), savedAuthor.getGenre(), savedAuthor.getYear());
-        GetUserResponse userResponse = new GetUserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
+        GetUserResponse authorResponse = new GetUserResponse(savedAuthor.getName(), savedAuthor.getEmail(), savedAuthor.getGenre(), savedAuthor.getYear());
+        GetUserResponse userResponse = new GetUserResponse(savedUser.getName(), savedUser.getEmail(), savedUser.getGenre(), savedUser.getYear());
 
         this.eventRepo.save(event);
 

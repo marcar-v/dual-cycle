@@ -38,15 +38,15 @@ public class UserService {
     }
 
     //Get user info by ID
-    public GetUserResponse getUser(String userId){
-        UserEntity user = this.repo.getReferenceById(userId);
+    public GetUserResponse getUser(String email){
+        UserEntity user = this.repo.getReferenceById(email);
         UserEntity userFound = this.repo.save(user);
         return new GetUserResponse(userFound.getName(), userFound.getEmail(), userFound.getGenre(), userFound.getYear());
     }
 
     //Update user
-    public UpdateUserResponse updateUser(String userId, UpdateUserRequest request){
-        UserEntity user = this.repo.findById(userId)
+    public UpdateUserResponse updateUser(String email, UpdateUserRequest request){
+        UserEntity user = this.repo.findById(email)
                         .orElseThrow();
         user.setGenre(request.genre());
         user.setYear(request.year());
@@ -54,10 +54,5 @@ public class UserService {
         this.repo.save(user);
 
         return new UpdateUserResponse(user.getName(), user.getGenre(), user.getYear());
-    }
-
-    //Delete user by ID
-    public void deleteUser(String userId){
-        repo.deleteById(userId);
     }
 }
